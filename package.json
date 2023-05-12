@@ -1,0 +1,38 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
+    "amazon-cognito-identity-js": "^6.2.0",
+    "expo": "~48.0.15",
+    "expo-camera": "~13.2.1",
+    "expo-image-manipulator": "^11.1.1",
+    "expo-status-bar": "~1.4.4",
+    "jwt-decode": "^3.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.71.7",
+    "react-native-design-to-component": "^1.1.0",
+    "react-native-fast-image": "^8.6.3",
+    "react-native-splash-screen": "^3.3.0",
+    "react-native-web": "~0.18.10"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.20.0",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/react": "~18.0.27",
+    "@types/react-dom": "~18.0.10",
+    "@types/react-native": "~0.63.2",
+    "typescript": "^4.9.5"
+  },
+  "private": true
+}
