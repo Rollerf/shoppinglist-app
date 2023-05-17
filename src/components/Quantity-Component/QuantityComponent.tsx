@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './Styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function QuantityComponent() {
   const [quantity, setQuantity] = useState(0);
@@ -18,13 +19,13 @@ export default function QuantityComponent() {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={decreaseQuantity}>
-        <Text style={styles.button}>{'<'}</Text>
+        <Icon name="minus" size={24} style={styles.quantity} />
       </TouchableOpacity>
 
       <Text style={styles.quantity}>{quantity}</Text>
 
       <TouchableOpacity onPress={increaseQuantity}>
-        <Text style={styles.button}>{'>'}</Text>
+        <Icon name="plus" size={24} style={styles.quantity} />
       </TouchableOpacity>
     </View>
   );

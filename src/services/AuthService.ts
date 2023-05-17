@@ -4,20 +4,24 @@ import jwtDecode from 'jwt-decode';
 import { CognitoPool } from '../config/CognitoPool';
 import { getUserData, storeUserData } from './UserService';
 
+const userLoged = "userLoged";
 
 export const isLogedIn = async () => {
     try {
-        const keys = await AsyncStorage.getAllKeys();
+        const isLoged = await AsyncStorage.getItem(userLoged);
 
-        return keys.length > 0;
+        return isLoged != null;
     } catch (e) {
         console.error(e);
     }
+
+    return false;
 }
 
 export const isValidToken = async () => {
     try {
         const user = await getUserData();
+
         if (user) {
             const { exp } = jwtDecode(user.accessToken) as {
                 exp: number;
@@ -28,14 +32,15 @@ export const isValidToken = async () => {
 
             return now < tokenExpiration;
         }
-        return false;
     } catch (e) {
         console.error(e);
     }
+
+    return false;
 }
 
-export const refreshToken = async () => {
-    const userName = global.userName;
+export const refreshAccessToken = async () => {
+    const userName = userLoged;
 
     if (await isValidToken()) {
         return;
@@ -69,4 +74,11 @@ export const refreshToken = async () => {
     } catch (e) {
         console.error(e);
     }
+}
+
+export const getAccessToken = async () => {
+    const user = await getUserData();
+    console.debug("getAccessToken ", user?.accessToken);
+
+    return user?.accessToken;
 }

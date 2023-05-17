@@ -2,18 +2,20 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#ADD8E6",
+        backgroundColor: "#5b73ec",
         margin: 1,
         borderColor: "#fff",
         flexDirection: "row",
-        
+        borderBottomColor: "#fff",
+        borderBottomWidth: .5,
+        borderRadius: 10,
+        justifyContent: "space-between"
+
     },
     Text: {
-        color: "#000",
-        fontSize: 40.,
-        justifyContent: "flex-start",
-        flexGrow: 3,
-        flexShrink: 1
+        color: "#fff",
+        fontSize: 40,
+        width: "75%",
     }
 });
 

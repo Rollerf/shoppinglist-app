@@ -38,10 +38,6 @@ export default function LoginScreen({ navigation }: any) {
       Password: password,
     });
 
-    //TODO: If access token is expired, refresh session.
-    //Do this in another place
-    // user.refreshSession
-
     user.authenticateUser(authDetails, {
       onSuccess: async res => {
         resetForm();
@@ -59,10 +55,10 @@ export default function LoginScreen({ navigation }: any) {
 
         setTimeout(() => {
           console.debug("Navigate to Home");
-          console.log("User Loged: ", userLoged.userName);
-          console.log("RefreshToken: ", userLoged.refreshToken);
-          console.log("AccessToken: ", userLoged.accessToken);
-          navigation.navigate('TakePhoto');
+          console.debug("User Loged: ", userLoged.userName);
+          console.debug("RefreshToken: ", userLoged.refreshToken);
+          console.debug("AccessToken: ", userLoged.accessToken);
+          navigation.navigate('List');
         }, 350);
       },
 

@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    View,
-    Text,
-    TextInput,
     StyleSheet,
-    TouchableOpacity,
-    Alert,
     ScrollView
 } from 'react-native';
 
-import { StatusBar } from "expo-status-bar";
 import ItemComponent from '../components/Item-Component/ItemComponent';
 import Item from '../models/Item';
+import AddItemComponent from '../components/AddItem-Component/AddItemComponent';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { isLogedIn } from '../services/AuthService';
+import ItemService from '../services/ItemService';
 
 export default function ListScreen({ navigation }: any) {
+    const [items, setItemsState] = useState<Item[]>([]);
+
+    useEffect(() => {
+        console.debug('ListScreen: useEffect');
+        isLogedIn().then((isLogedIn) => {
+            if (!isLogedIn) {
+                console.debug('ListScreen: useEffect: isLogedIn: false');
+                navigation.navigate('Login');
+            }
+        });
+
+        ItemService.getItems().then((items) => {
+            console.debug('ListScreen: useEffect: getItem');
+            setItemsState(items);
+        }).catch((response) => {
+            if (!response)
+                console.error("getItems: " + response.statusText);
+        });
+    }, []);
+
     // -------------------- ACTIONS -------------------- //
     const onPressLogin = () => {
         console.debug('ListScreen: onPressLogin');
@@ -23,31 +41,22 @@ export default function ListScreen({ navigation }: any) {
     // -------------------- STYLES -------------------- //
     const styles = StyleSheet.create({
         container: {
-            backgroundColor: "#fff",
-            // flex: 1,
-            alignItems: "flex-end",
-        }
+            backgroundColor: "#5b73ec"
+        },
+        GestureHandler: {
+        },
     });
-
-    // Generate the items
-    const items:Item[] = [];
-    for (let i = 1; i <= 20; i++) {
-        items.push(new Item("Item" + i));
-    }
-
 
     // -------------------- RENDER -------------------- //
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <StatusBar style="auto" />
-            <ItemComponent item={new Item("Item1 nombre muy largo a ver que hace en caso de que se alarguen")}></ItemComponent>
-            {items.map((item, index) => (
-                // Use the 'eval' function to dynamically execute the generated component
-                <ItemComponent item={item} key={index}></ItemComponent>
-            ))}
-            {/* <TouchableOpacity style={styles.loginBtn} onPress={onPressLogin}>
-                <Text>LOGIN</Text>
-            </TouchableOpacity> */}
+            {/* <StatusBar style="auto" /> */}
+            <AddItemComponent />
+            <GestureHandlerRootView style={styles.GestureHandler}>
+                {items.map((item) => (
+                    <ItemComponent item={item} key={item.name}></ItemComponent>
+                ))}
+            </GestureHandlerRootView>
         </ScrollView>
     );
 };

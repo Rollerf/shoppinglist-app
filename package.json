@@ -23,7 +23,9 @@
     "react-native": "0.71.7",
     "react-native-design-to-component": "^1.1.0",
     "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": "^2.10.0",
     "react-native-splash-screen": "^3.3.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@types/react": "~18.0.27",
     "@types/react-dom": "~18.0.10",
     "@types/react-native": "~0.63.2",
+    "@types/react-native-vector-icons": "^6.4.13",
     "typescript": "^4.9.5"
   },
   "private": true

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
     View,
-    Text,
-    StyleSheet,
+    Text
 } from 'react-native';
 import Item from '../../models/Item';
 import QuantityComponent from '../Quantity-Component/QuantityComponent';
 import styles from './Styles';
+import { Swipeable } from 'react-native-gesture-handler';
+import ActionItemComponent from '../Action-Item-Component/ActionItemComponent';
 
 interface ItemComponentProps {
     item: Item;
@@ -14,13 +15,18 @@ interface ItemComponentProps {
     // handleQuantityDecrease: (item: Item) => void;
     // handleQuantityIncrease: (item: Item) => void;
 }
-//TODO: Continue editing styles to the component
+
 export default function ItemComponent(props: ItemComponentProps) {
+    const endAction = () => {
+        console.log(new Date() + ' endAction');
+    };
     // -------------------- RENDER -------------------- //
     return (
-        <View style={styles.container}>
-            <Text style={styles.Text}>{props.item.name}</Text>
-            <QuantityComponent />
-        </View>
+        <Swipeable onEnded={endAction} renderRightActions={ActionItemComponent}>
+            <View style={styles.container}>
+                <Text style={styles.Text}>{props.item.name}</Text>
+                <QuantityComponent />
+            </View>
+        </Swipeable>
     );
 };
