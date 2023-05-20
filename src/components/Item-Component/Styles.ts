@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         borderBottomColor: "#fff",
         borderBottomWidth: .5,
         borderRadius: 10,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        padding: 5,
 
     },
     Text: {

@@ -1,35 +1,49 @@
 import { API_URL } from "../../.env-vars";
 import Item from "../models/Item";
-import { authHeader } from "./AuthHeader";
+import { authHeader, authHeaderWithContentType } from "./AuthHeader";
 
 const API_URL_ITEMS = API_URL + '//items';
 
 class ItemService {
-    async getItems() {
+    async getItems(): Promise<Item[]> {
         console.debug("getItems");
         const header = await authHeader();
 
         return await fetch(API_URL_ITEMS, { headers: header }).then(response => {
             if (response.ok) {
                 return response.json();
-            } else {
-                throw new Error(response.statusText);
             }
+
+            throw new Error("getItems error: " + response.statusText);
+        }).catch(error => {
+            console.error("getItems error: " + error);
         });
     }
 
     async createItem(item: Item) {
+        console.debug("createItem");
+
         return await fetch(API_URL_ITEMS, {
             method: 'POST',
-            headers: await authHeader(),
+            headers: await authHeaderWithContentType(),
             body: JSON.stringify(item)
+        }).then(response => {
+            if (response.ok) {
+                console.debug("createItem success");
+
+                return;
+            }
+
+            console.error("createItem error: " + response.statusText);
+        }).catch(error => {
+            console.error("createItem error: " + error);
         });
     }
 
     async modifyItem(item: Item) {
         return await fetch(API_URL_ITEMS, {
             method: 'PATCH',
-            headers: await authHeader(),
+            headers: await authHeaderWithContentType(),
             body: JSON.stringify(item)
         });
     }
@@ -38,7 +52,7 @@ class ItemService {
         item.deleted = true;
         return await fetch(API_URL_ITEMS, {
             method: 'PATCH',
-            headers: await authHeader(),
+            headers: await authHeaderWithContentType(),
             body: JSON.stringify(item)
         });
     }

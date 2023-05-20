@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles';
+import Item from '../../models/Item';
 
-const AddItemComponent = () => {
+interface AddItemComponentProps {
+    handleAddButtonClick: (item: Item) => void;
+}
+
+export default function AddItemComponent(props: AddItemComponentProps) {
     const [inputValue, setInputValue] = useState('');
 
     const handleButtonPress = () => {
-        // Perform action with the input value
-        console.log('Input value:', inputValue);
-        // You can replace the above line with your desired action, like sending the input value to an API
+        let inputName = inputValue.trim().toLowerCase();
+        let newItem: Item;
 
-        // Clear the input value after the action
-        setInputValue('');
+        setInputValue("");
+
+        if (inputName === "") {
+            return;
+        }
+
+        newItem = new Item(inputName, 1, false);
+        props.handleAddButtonClick(newItem);
     };
 
     return (
@@ -30,5 +40,3 @@ const AddItemComponent = () => {
         </View>
     );
 };
-
-export default AddItemComponent;

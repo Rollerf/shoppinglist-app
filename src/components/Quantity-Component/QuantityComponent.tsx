@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './Styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Item from '../../models/Item';
 
-export default function QuantityComponent() {
-  const [quantity, setQuantity] = useState(0);
+interface QuantityComponentProps {
+  item: Item;
+  decreaseQuantity: (item: Item) => void;
+  increaseQuantity: (item: Item) => void;
+}
 
-  const decreaseQuantity = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
+export default function QuantityComponent(props: QuantityComponentProps) {
+  const handleQuantityDecrease = () => {
+    props.decreaseQuantity(props.item);
   };
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+  const handleQuantityIncrease = () => {
+    props.increaseQuantity(props.item);
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={decreaseQuantity}>
+      <TouchableOpacity onPress={handleQuantityDecrease}>
         <Icon name="minus" size={24} style={styles.quantity} />
       </TouchableOpacity>
 
-      <Text style={styles.quantity}>{quantity}</Text>
+      <Text style={styles.quantity}>{props.item.quantity}</Text>
 
-      <TouchableOpacity onPress={increaseQuantity}>
+      <TouchableOpacity onPress={handleQuantityIncrease}>
         <Icon name="plus" size={24} style={styles.quantity} />
       </TouchableOpacity>
     </View>

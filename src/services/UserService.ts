@@ -14,7 +14,7 @@ export const storeUserData = async (user: User) => {
 
 export const getUserData = async (): Promise<User | undefined> => {
     try {
-        console.log("getUserData " + userLoged);
+        console.debug("getUserData");
 
         const jsonValue = await AsyncStorage.getItem(userLoged);
 

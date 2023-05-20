@@ -40,6 +40,7 @@ export const isValidToken = async () => {
 }
 
 export const refreshAccessToken = async () => {
+    console.debug("refreshAccessToken");
     const userName = userLoged;
 
     if (await isValidToken()) {
@@ -77,8 +78,8 @@ export const refreshAccessToken = async () => {
 }
 
 export const getAccessToken = async () => {
+    console.debug("getAccessToken");
     const user = await getUserData();
-    console.debug("getAccessToken ", user?.accessToken);
 
     return user?.accessToken;
 }

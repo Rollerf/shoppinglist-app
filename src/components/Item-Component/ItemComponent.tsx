@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text
@@ -11,21 +11,26 @@ import ActionItemComponent from '../Action-Item-Component/ActionItemComponent';
 
 interface ItemComponentProps {
     item: Item;
-    // toggleDelete: (item: Item) => void;
-    // handleQuantityDecrease: (item: Item) => void;
-    // handleQuantityIncrease: (item: Item) => void;
+    toggleDelete: (item: Item) => void;
+    handleQuantityDecrease: (item: Item) => void;
+    handleQuantityIncrease: (item: Item) => void;
 }
 
 export default function ItemComponent(props: ItemComponentProps) {
-    const endAction = () => {
-        console.log(new Date() + ' endAction');
+    const deleteItemAction = () => {
+        console.debug(new Date() + " deleteItemAction");
+        props.toggleDelete(props.item);
     };
-    // -------------------- RENDER -------------------- //
+
     return (
-        <Swipeable onEnded={endAction} renderRightActions={ActionItemComponent}>
+        <Swipeable onEnded={deleteItemAction}
+            renderRightActions={ActionItemComponent}
+            activeOffsetX={[-20, 20]}>
             <View style={styles.container}>
                 <Text style={styles.Text}>{props.item.name}</Text>
-                <QuantityComponent />
+                <QuantityComponent decreaseQuantity={props.handleQuantityDecrease}
+                    increaseQuantity={props.handleQuantityIncrease}
+                    item={props.item} />
             </View>
         </Swipeable>
     );
