@@ -7,6 +7,8 @@ import ListScreen from './src/screens/ListScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const environment = process.env.NODE_ENV;
+  console.debug("Environment " + environment);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='List'>

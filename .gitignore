@@ -8,8 +8,12 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+*.apk
+*.aab
 
 # macOS
 .DS_Store
 TODO.md
 .env-vars.ts
+.env
+eas_working.json

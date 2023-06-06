@@ -21,6 +21,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7c113c3c-38df-4283-8b9d-52ff1016673d"
+      }
+    },
+    "android": {
+      "package": "com.rollerf.shoppinglistapp"
     }
   }
 }

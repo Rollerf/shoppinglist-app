@@ -1,8 +1,8 @@
-import { API_URL } from "../../.env-vars";
 import Item from "../models/Item";
 import { authHeader, authHeaderWithContentType } from "./AuthHeader";
+import {REACT_APP_API_URL} from "@env";
 
-const API_URL_ITEMS = API_URL + '//items';
+const API_URL_ITEMS = REACT_APP_API_URL + '//items';
 
 class ItemService {
     async getItems(): Promise<Item[]> {
