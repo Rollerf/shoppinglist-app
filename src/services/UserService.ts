@@ -4,6 +4,7 @@ import { User } from '../models/User';
 const userLoged = "userLoged";
 
 export const storeUserData = async (user: User) => {
+    console.debug("storeUserData");
     try {
         const jsonValue = JSON.stringify(user);
         await AsyncStorage.setItem(userLoged, jsonValue);

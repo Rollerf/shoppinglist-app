@@ -1,11 +1,9 @@
-import { getAccessToken, isValidToken, refreshAccessToken } from "./AuthService";
+import { getAccessToken, refreshAccessToken } from "./AuthService";
 
 export const authHeader = async () => {
   console.debug("authHeader");
 
-  if (!await isValidToken()) {
-    refreshAccessToken();
-  }
+  await refreshAccessToken();
 
   const token = await getAccessToken();
 
