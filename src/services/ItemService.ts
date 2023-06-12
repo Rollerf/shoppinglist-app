@@ -21,29 +21,9 @@ class ItemService {
         });
     }
 
-    async createItem(item: Item) {
-        console.debug("createItem");
-
+    async putItem(item: Item) {
         return await fetch(API_URL_ITEMS, {
-            method: 'POST',
-            headers: await authHeaderWithContentType(),
-            body: JSON.stringify(item)
-        }).then(response => {
-            if (response.ok) {
-                console.debug("createItem success");
-
-                return;
-            }
-
-            console.error("createItem error: " + response.statusText);
-        }).catch(error => {
-            console.error("createItem error: " + error);
-        });
-    }
-
-    async modifyItem(item: Item) {
-        return await fetch(API_URL_ITEMS, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: await authHeaderWithContentType(),
             body: JSON.stringify(item)
         });
@@ -52,7 +32,7 @@ class ItemService {
     async deleteItem(item: Item) {
         item.deleted = true;
         return await fetch(API_URL_ITEMS, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: await authHeaderWithContentType(),
             body: JSON.stringify(item)
         });

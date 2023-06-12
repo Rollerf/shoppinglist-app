@@ -58,7 +58,7 @@ export default function ListScreen({ navigation }: any) {
         if (item.name !== "" && newItem === undefined) {
             console.log("Create item: " + item.name);
             newItem = new Item(item.name);
-            ItemService.createItem(newItem).then(() => {
+            ItemService.putItem(newItem).then(() => {
                 addItem(items, newItem, setItems);
             }
             ).catch(err => console.log(err));
@@ -70,7 +70,7 @@ export default function ListScreen({ navigation }: any) {
             console.log("Modify item: " + item.name);
             let newItems = items.filter((e) => e.name.toLowerCase() !== item.name);
             newItem.deleted = false;
-            ItemService.modifyItem(newItem).then(() => {
+            ItemService.putItem(newItem).then(() => {
                 addItem(newItems, newItem, setItems);
             }
             ).catch(err => console.log(err));
@@ -102,7 +102,7 @@ export default function ListScreen({ navigation }: any) {
         }
 
         setItems(newItems);
-        ItemService.modifyItem(newItems[index]);
+        ItemService.putItem(newItems[index]);
     };
 
     const increaseQuantity = (item: Item) => {
@@ -115,7 +115,7 @@ export default function ListScreen({ navigation }: any) {
         newItems[index].quantity++;
 
         setItems(newItems);
-        ItemService.modifyItem(newItems[index]);
+        ItemService.putItem(newItems[index]);
     };
 
     // -------------------- RENDER -------------------- //
