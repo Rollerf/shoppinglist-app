@@ -25,7 +25,7 @@ export default function ListScreen({ navigation }: any) {
 
                     return;
                 }
-                
+
                 console.debug('ListScreen: useEffect: isLoggedIn: true');
                 const items = await ItemService.getItems();
                 setItems(items);
@@ -69,7 +69,8 @@ export default function ListScreen({ navigation }: any) {
         if (newItem.deleted) {
             console.log("Modify item: " + item.name);
             let newItems = items.filter((e) => e.name.toLowerCase() !== item.name);
-            newItem.deleted = false;
+            newItem = new Item(newItem.name, newItem.quantity, false);
+
             ItemService.putItem(newItem).then(() => {
                 addItem(newItems, newItem, setItems);
             }
@@ -87,7 +88,10 @@ export default function ListScreen({ navigation }: any) {
         });
 
         setItems(updatedList);
-        ItemService.deleteItem(item);
+        ItemService.deleteItem(item).then(() => {
+            setItems(updatedList);
+        }
+        ).catch(err => console.log(err));
     };
 
     const decreaseQuantity = (item: Item) => {
@@ -101,8 +105,10 @@ export default function ListScreen({ navigation }: any) {
             newItems[index].quantity--;
         }
 
-        setItems(newItems);
-        ItemService.putItem(newItems[index]);
+        ItemService.putItem(newItems[index]).then(() => {
+            setItems(newItems);
+        }
+        ).catch(err => console.log(err));
     };
 
     const increaseQuantity = (item: Item) => {
@@ -115,7 +121,10 @@ export default function ListScreen({ navigation }: any) {
         newItems[index].quantity++;
 
         setItems(newItems);
-        ItemService.putItem(newItems[index]);
+        ItemService.putItem(newItems[index]).then(() => {
+            setItems(newItems);
+        }
+        ).catch(err => console.log(err));
     };
 
     // -------------------- RENDER -------------------- //
