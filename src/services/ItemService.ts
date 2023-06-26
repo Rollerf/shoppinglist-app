@@ -18,6 +18,8 @@ class ItemService {
             throw new Error("getItems error: " + response.statusText);
         }).catch(error => {
             console.error("getItems error: " + error);
+
+            throw error;
         });
     }
 

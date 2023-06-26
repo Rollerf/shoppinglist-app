@@ -24,3 +24,13 @@ export const getUserData = async (): Promise<User | undefined> => {
         console.error("getUserData " + e);
     }
 }
+
+export const deleteUserData = async () => {
+    try {
+        console.debug("deleteUserData");
+
+        await AsyncStorage.removeItem(userLoged);
+    } catch (e) {
+        console.error("deleteUserData: " + e);
+    }
+}

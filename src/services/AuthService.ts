@@ -2,7 +2,7 @@ import { CognitoUser, CognitoRefreshToken } from 'amazon-cognito-identity-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwtDecode from 'jwt-decode';
 import { CognitoPool } from '../config/CognitoPool';
-import { getUserData, storeUserData } from './UserService';
+import { deleteUserData, getUserData, storeUserData } from './UserService';
 import { User } from '../models/User';
 
 const userLoged = "userLoged";
@@ -87,6 +87,7 @@ export const refreshAccessToken = async () => {
 
         await storeUserData(user);
     } catch (e) {
+        await deleteUserData();
         console.error("Error refreshing token", e);
     }
 }

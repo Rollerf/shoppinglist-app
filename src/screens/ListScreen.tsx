@@ -32,6 +32,8 @@ export default function ListScreen({ navigation }: any) {
             } catch (err) {
                 console.error(err);
                 navigation.navigate('Login');
+
+                return;
             }
         };
 
