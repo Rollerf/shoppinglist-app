@@ -32,6 +32,7 @@ class ItemService {
     }
 
     async deleteItem(item: Item) {
+        console.debug(new Date() + " deleteItem");
         item.deleted = true;
         return await fetch(API_URL_ITEMS, {
             method: 'PUT',

@@ -18,13 +18,12 @@ interface ItemComponentProps {
 
 export default function ItemComponent(props: ItemComponentProps) {
     const deleteItemAction = () => {
-        console.debug(new Date() + " deleteItemAction");
         props.toggleDelete(props.item);
     };
 
     return (
         <Swipeable onEnded={deleteItemAction}
-            renderRightActions={ActionItemComponent}
+            renderRightActions={() => ActionItemComponent({ item: props.item, toggleDelete: props.toggleDelete })}
             activeOffsetX={[-20, 20]}>
             <View style={styles.container}>
                 <Text style={styles.Text}>{props.item.name}</Text>
